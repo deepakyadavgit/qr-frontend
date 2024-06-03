@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -27,7 +28,7 @@ const CustomerView = () => {
                                 <div className="item flex flex-col gap-2 p-2 bg-white m-2 mb-4 rounded-md">
                                     <div className="name-details flex justify-between">
                                         <div className="name font-semibold">Mocha</div>
-                                        <div className="details">Details</div>
+                                        <div className="details"><Link to="/view-item-details" className="text-blue-500 hover:underline">Details</Link></div>
                                     </div>
                                     <div className="rates  flex justify-between">
                                         <div><span className='font-semibold'>$50 </span><span className='text-sm'>(Small)</span></div>
@@ -41,7 +42,7 @@ const CustomerView = () => {
                                 <div className="item flex flex-col gap-2 p-2 bg-white m-2 mb-4 rounded-md">
                                     <div className="name-details flex justify-between">
                                         <div className="name font-semibold">Cheese Crossiants</div>
-                                        <div className="details">Details</div>
+                                        <div className="details"><Link to="/view-item-details" className="text-blue-500 hover:underline">Details</Link></div>
                                     </div>
                                     <div className="rates  flex justify-between">
                                         <div><span className='font-semibold'>$50 </span><span className='text-sm'>(Small)</span></div>
@@ -66,7 +67,7 @@ const CustomerView = () => {
                             <div className="each-item flex flex-col gap-2 p-2 bg-white m-2 mb-4 rounded-md">
                                 <div className="name-details flex justify-between">
                                     <div className="name font-semibold">Mocha</div>
-                                    <div className="details">Details</div>
+                                    <div className="details"><Link to="/view-item-details" className="text-blue-500 hover:underline">Details</Link></div>
                                 </div>
                                 <div className="rates  flex justify-between">
                                     <div><span className='font-semibold'>$50 </span><span className='text-sm'>(Small)</span></div>
@@ -80,7 +81,7 @@ const CustomerView = () => {
                             <div className="item flex flex-col gap-2 p-2 bg-white m-2 mb-4 rounded-md">
                                 <div className="name-details flex justify-between">
                                     <div className="name font-semibold">Cheese Crossiants</div>
-                                    <div className="details">Details</div>
+                                    <div className="details"><Link to="/view-item-details" className="text-blue-500 hover:underline">Details</Link></div>
                                 </div>
                                 <div className="rates  flex justify-between">
                                     <div><span className='font-semibold'>$50 </span><span className='text-sm'>(Small)</span></div>
@@ -99,7 +100,7 @@ const CustomerView = () => {
                             <div className="each-item flex flex-col gap-2 p-2 bg-white m-2 mb-4 rounded-md">
                                 <div className="name-details flex justify-between">
                                     <div className="name font-semibold">Coke Lite</div>
-                                    <div className="details">Details</div>
+                                    <div className="details"><Link to="/view-item-details" className="text-blue-500 hover:underline">Details</Link></div>
                                 </div>
                                 <div className="rates  flex justify-between">
                                     <div><span className='font-semibold'>$50 </span><span className='text-sm'>(Small)</span></div>
