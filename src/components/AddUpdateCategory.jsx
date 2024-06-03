@@ -59,10 +59,15 @@ const AddUpdateCategory = ({ userId }) => {
 
   return (
     <>
-      <div className="flex justify-center bg-[#00284d] min-h-screen min-w-screen">
-        <div className="container w-full sm:w-3/4">
-          <div className="container mx-auto p-4">
-            <h2 className="my-10 text-5xl text-white">Add/Update Category</h2>
+      <div className="parent-bg flex justify-center  min-h-screen bg-slate-700">
+        <div className="container w-full sm:w-96 bg-[#D9D9D9]">
+          {/*component heading */}
+          <div className="div bg-black text-white py-6">
+            <h1 className="text-2xl px-6">Add/Update Category</h1>
+          </div>
+
+          {/* component middle section */}
+          <div className="flex flex-col  gap-5 py-5 p-5">
 
             {/* Form to add a new category */}
             <div className="mb-4">
@@ -120,6 +125,9 @@ const AddUpdateCategory = ({ userId }) => {
                 )}
               </div>
             ))}
+            
+              
+      
           </div>
         </div>
       </div>

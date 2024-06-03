@@ -33,45 +33,47 @@ const AddUpdateItem = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-        {/* code for back button on the top */}
-      <button
-        className="text-blue-500 hover:text-blue-700 mb-4"
-        onClick={() => navigate('/dashboard')}
-      >
-        ← Back
-      </button>
+    <>
+      <div className="parent-bg flex justify-center  min-h-screen bg-slate-700">
+        <div className="container w-full sm:w-96 bg-[#D9D9D9]">
+          {/* component heading */}
+          <div className="div bg-black text-white py-6">
+            <h1 className="text-2xl px-6">Add/Update Item</h1>
+          </div>
 
-        {/* code for button to add new item */}
-      <h2 className="text-2xl font-semibold mb-4">Add/Update Item</h2>
-      <button
-        onClick={() => navigate('/ItemDetails')}
-        className="w-full flex items-center justify-center bg-gray-200 p-4 mb-4 rounded-lg"
-      >
-        <span className="mr-2">➕</span>
-        Add New Item
-      </button>
-      <div>
-        <h3 className="text-lg font-semibold mb-2">Already Added Items:</h3>
-        {items.length > 0 ? (
-          <ul>
-            {items.map(item => (
-              <li key={item.id} className="mb-4 flex justify-between items-center border p-4 rounded-lg bg-white shadow-md">
-                <span>{item.name}</span>
-                <button
-                  onClick={() => handleEditItem(item.id)}
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  ✏️ Edit
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-500">No items added yet.</p>
-        )}
+          {/* component middle section */}
+          <div className="flex flex-col  gap-5 py-5 p-5">
+            <button
+              onClick={() => navigate('/item-details')}
+              className="w-full bg-green-500 text-white py-2 rounded-md mt-2 hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-500 focus:ring-opacity-50"
+            >
+              <span className="mr-2">➕</span>
+              Add New Item
+            </button>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Already Added Items:</h3>
+              {items.length > 0 ? (
+                <ul>
+                  {items.map(item => (
+                    <li key={item.id} className="mb-4 flex justify-between items-center border p-4 rounded-lg bg-white shadow-md">
+                      <span>{item.name}</span>
+                      <button
+                        onClick={() => handleEditItem(item.id)}
+                        className="text-blue-500 hover:text-blue-700"
+                      >
+                        ✏️ Edit
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500">No items added yet.</p>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
