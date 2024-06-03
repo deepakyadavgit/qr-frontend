@@ -10,9 +10,9 @@ import AddUpdateItem from './components/AddUpdateItem';
 import ItemAvailability from './components/ItemAvailability';
 import ApplyDiscount from './components/ApplyDiscount';
 import TodaysSpecial from './components/TodaysSpecial';
-import MenuPreview from './components/MenuPreview';
+
 import Settings from './components/Settings';
-import Profile from './components/Profile';
+
 import ChangePassword from './components/ChangePassword';
 import GetQRCode from './components/GetQRCode';
 import CustomerFeedback from './components/CustomerFeedback';
@@ -23,6 +23,8 @@ import ItemPricing from './components/ItemPricing';
 import ItemImages from './components/ItemImages';
 import ItemAdded from './components/ItemAdded';
 import CustomerView from './components/CustomerView';
+import DiscountForm from './components/DiscountForm';
+import MenuPreview from './components/MenuPreview'
 
 const App = () => {
   return (
@@ -41,7 +43,7 @@ const App = () => {
         <Route path='/todays-special' element={<TodaysSpecial />} />
         <Route path='/menu-preview' element={<MenuPreview />} />
         <Route path='/settings' element={<Settings />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/get-qr-code" element={<GetQRCode />} />
         <Route path="/customer-feedback" element={<CustomerFeedback />} />
@@ -50,6 +52,7 @@ const App = () => {
         <Route path="/item-details" element={<ItemDetails />} />
         <Route path="/item-pricing" element={<ItemPricing />} />
         <Route path="/customer-view" element={<CustomerView />} />
+        <Route path="/discount-form/:itemId" element={<DiscountForm />} />
       </Routes>
     </BrowserRouter>
   );

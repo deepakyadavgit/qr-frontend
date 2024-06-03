@@ -59,6 +59,10 @@ const Dashboard = () => {
               Settings and More
             </button>
           </div>
+          <footer className="footer bg-black text-white py-6 text-center">
+                        
+                        <p>Served with ❤️</p>
+                    </footer>
         </div>
       </div>
     </>

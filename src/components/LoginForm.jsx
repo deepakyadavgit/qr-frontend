@@ -13,7 +13,6 @@ const LoginForm = () => {
       .then(result => {
         console.log('Login response:', result);
         if (result) {
-          
           // Assuming `success` indicates a successful login
           navigate('/dashboard');
         } else {
@@ -28,40 +27,50 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center bg-[#00284d] min-h-screen min-w-screen">
-        <div className="heading m-20">
-          <p className='text-5xl text-white'>Welcome to QR-based Digital Menu</p>
+      <div className="flex justify-center min-h-screen bg-slate-700">
+        <div className="container w-full sm:w-96 bg-[#D9D9D9]">
+          {/* component heading */}
+          <div className="bg-black text-white py-6">
+            <h1 className="text-2xl px-6">Login</h1>
+          </div>
+
+          {/* component middle section */}
+          <div className="flex flex-col gap-5 py-5 p-5">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="block text-gray-700">Email</label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Password</label>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+              >
+                Login
+              </button>
+            </form>
+            <p className="text-center text-gray-700">
+              Don't have an account? <Link to="/signup" className="text-blue-500 hover:underline">Sign Up</Link>
+            </p>
+          </div>
         </div>
-        <form onSubmit={handleSubmit} className="border-4 sm:w-[90%] md:w-[60%] lg:w-[40%] w-[100%] mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold mb-4">Login</h2>
-          <div className="mb-4">
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-              required />
-          </div>
-          <div className="mb-4">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-              required />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-          >
-            Login
-          </button>
-        </form>
-        <p className='text-center text-white'>Don't have an account? <Link to="/signup" className="text-xl ">
-          Sign Up
-        </Link></p>
       </div>
     </>
   );
