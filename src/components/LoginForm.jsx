@@ -14,6 +14,7 @@ const LoginForm = () => {
         console.log('Login response:', result);
         if (result) {
           // Assuming `success` indicates a successful login
+          localStorage.setItem("userId", result.data.data.user);
           navigate('/dashboard');
         } else {
           alert('Login failed, please check your credentials.');
