@@ -25,6 +25,7 @@ import ItemAdded from './components/ItemAdded';
 import CustomerView from './components/CustomerView';
 import DiscountForm from './components/DiscountForm';
 import MenuPreview from './components/MenuPreview'
+import ViewItemDetails from './components/ViewItemDetails';
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/item-pricing" element={<ItemPricing />} />
         <Route path="/customer-view" element={<CustomerView />} />
         <Route path="/discount-form/:itemId" element={<DiscountForm />} />
+        <Route path="/view-item-details" element={<ViewItemDetails />} />
       </Routes>
     </BrowserRouter>
   );

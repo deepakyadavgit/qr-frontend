@@ -71,6 +71,7 @@ const LoginForm = () => {
               Don't have an account? <Link to="/signup" className="text-blue-500 hover:underline">Sign Up</Link>
             </p>
           </div>
+          
         </div>
       </div>
     </>
