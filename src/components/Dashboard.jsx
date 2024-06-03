@@ -7,51 +7,51 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="flex justify-center bg-[#00284d] min-h-screen min-w-screen">
-        <div className="container w-full sm:w-3/4">
-          <div className="heading my-10">
-            <p className='text-5xl text-white'>Welcome to Dashboard</p>
+      <div className="parent-bg flex justify-center  min-h-screen bg-slate-700">
+        <div className="container w-full sm:w-96 bg-[#D9D9D9]">
+          <div className="div bg-black text-white py-6">
+            <h1 className="text-2xl px-6">Welcome, Monarch Cafe</h1>
           </div>
 
-          <div className="flex flex-col sm:flex-row md:justify-left gap-5 align-middle flex-wrap">
+          <div className="flex flex-col  gap-5 py-5">
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/add-update-category')}
             >
               Add/Update Category
             </button>
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/add-update-item')}
             >
               Add/Update an Item
             </button>
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/item-availability')}
             >
               Item's Availability
             </button>
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/apply-discount')}
             >
               Apply Discount
             </button>
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/todays-special')}
             >
               Today's Special
             </button>
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/menu-preview')}
             >
               Menu Preview
             </button>
             <button
-              className="border bg-white rounded-md text-blue mx-5 my-1 p-4 sm:h-fit sm:w-fit w-full"
+              className=" bg-white rounded-md mx-5 p-5 border"
               onClick={() => navigate('/settings')}
             >
               Settings and More
