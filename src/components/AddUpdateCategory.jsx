@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const AddUpdateCategory = ({ userId }) => {
+const AddUpdateCategory = () => {
+  const userId = localStorage.getItem("userId");
   const [categories, setCategories] = useState([]);
-  const [newCategoryName, setNewCategoryName] = useState('');
+  const [newCategoryName, setNewCategoryName] = useState("");
   const [editCategoryId, setEditCategoryId] = useState(null);
-  const [editCategoryName, setEditCategoryName] = useState('');
+  const [editCategoryName, setEditCategoryName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,20 +16,33 @@ const AddUpdateCategory = ({ userId }) => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/categories?userId=${userId}`);
-      setCategories(response.data);
+      const response = await axios.get(`http://localhost:5000/api/categories`, {
+        params: {
+          userId,
+        },
+      });
+      setCategories(response.data.data);
     } catch (err) {
-      console.error('Error fetching categories:', err.response ? err.response.data : err.message);
+      console.error(
+        "Error fetching categories:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
   const handleAddCategory = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/categories', { name: newCategoryName, userId });
-      setCategories([...categories, response.data]);
-      setNewCategoryName('');
+      const response = await axios.post(
+        "http://localhost:5000/api/categories",
+        { name: newCategoryName, userId }
+      );
+      setCategories([...categories, response.data.data]);
+      setNewCategoryName("");
     } catch (err) {
-      console.error('Error adding category:', err.response ? err.response.data : err.message);
+      console.error(
+        "Error adding category:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
@@ -39,21 +53,38 @@ const AddUpdateCategory = ({ userId }) => {
 
   const handleUpdateCategory = async () => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/categories/${editCategoryId}`, { name: editCategoryName, userId });
-      setCategories(categories.map(category => category._id === editCategoryId ? response.data : category));
+      const response = await axios.put(
+        `http://localhost:5000/api/categories/${editCategoryId}`,
+        { name: editCategoryName, userId }
+      );
+      setCategories(
+        categories.map((category) =>
+          category._id === editCategoryId ? response.data.data : category
+        )
+      );
       setEditCategoryId(null);
-      setEditCategoryName('');
+      setEditCategoryName("");
     } catch (err) {
-      console.error('Error updating category:', err.response ? err.response.data : err.message);
+      console.error(
+        "Error updating category:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/categories/${categoryId}?userId=${userId}`);
-      setCategories(categories.filter(category => category._id !== categoryId));
+      await axios.delete(
+        `http://localhost:5000/api/categories/${categoryId}?userId=${userId}`
+      );
+      setCategories(
+        categories.filter((category) => category._id !== categoryId)
+      );
     } catch (err) {
-      console.error('Error deleting category:', err.response ? err.response.data : err.message);
+      console.error(
+        "Error deleting category:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
@@ -68,7 +99,6 @@ const AddUpdateCategory = ({ userId }) => {
 
           {/* component middle section */}
           <div className="flex flex-col  gap-5 py-5 p-5">
-
             {/* Form to add a new category */}
             <div className="mb-4">
               <input
@@ -87,47 +117,49 @@ const AddUpdateCategory = ({ userId }) => {
             </div>
 
             {/* Show all the categories fetched from DB */}
-            {categories.map(category => (
-              <div key={category._id} className="flex items-center justify-between mb-4 p-4 bg-gray-100 rounded-md shadow-sm">
-                {editCategoryId === category._id ? (
-                  <>
-                    <input
-                      type="text"
-                      value={editCategoryName}
-                      onChange={(e) => setEditCategoryName(e.target.value)}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-                    />
-                    <button
-                      onClick={handleUpdateCategory}
-                      className="text-blue-500 hover:text-blue-600"
-                    >
-                      ✅
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <p>{category.name}</p>
-                    <div className="flex items-center space-x-2">
+            {categories
+              .filter((category) => category.name !== "Uncategorized")
+              .map((category) => (
+                <div
+                  key={category._id}
+                  className="flex items-center justify-between mb-4 p-4 bg-gray-100 rounded-md shadow-sm"
+                >
+                  {editCategoryId === category._id ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editCategoryName}
+                        onChange={(e) => setEditCategoryName(e.target.value)}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                      />
                       <button
-                        onClick={() => handleEditCategory(category)}
-                        className="text-blue-500 hover:text-blue-600"
+                        onClick={handleUpdateCategory}
                       >
-                        ✏️
+                        ✅
                       </button>
-                      <button
-                        onClick={() => handleDeleteCategory(category._id)}
-                        className="text-red-500 hover:text-red-600"
-                      >
-                        🗑️
-                      </button>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-            
-              
-      
+                      <button onClick={()=>setEditCategoryId(null)} >❌</button> 
+                    </>
+                  ) : (
+                    <>
+                      <p>{category.name}</p>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => handleEditCategory(category)}
+                          className="text-blue-500 hover:text-blue-600"
+                        >
+                          ✏️
+                        </button>
+                        <button
+                          onClick={() => handleDeleteCategory(category._id)}
+                          className="text-red-500 hover:text-red-600"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
           </div>
         </div>
       </div>

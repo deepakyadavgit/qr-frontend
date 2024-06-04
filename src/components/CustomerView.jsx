@@ -116,7 +116,7 @@ const CustomerView = () => {
 
                     </div>
                     <footer className="footer bg-black text-white py-6">
-                        <a href="#" className="mx-4">Submit Feedback</a>
+                        
                         <p>Served with ❤️</p>
                     </footer>
                 </div>

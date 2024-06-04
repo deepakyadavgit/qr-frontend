@@ -1,11 +1,25 @@
+import axios from 'axios';
 import React from 'react';
 
 const GetQRCode = () => {
+  const userId = localStorage.getItem("userId");
+  const [qrCode, setQrCode] = React.useState("");
+  React.useEffect(() => {
+    const fetchUser = async () => {
+      // Replace with actual API call
+      const res = await axios.get(`http://localhost:5000/api/users/${userId}`);
+      console.log(res);
+      if (res.data.success) {
+        setQrCode(res.data.data.qrCode);
+      }
+    };
+    fetchUser();
+  }, []);
   const qrValue = "https://your-unique-url.com"; // Replace with your unique URL
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png";
+    link.href = "";
     link.download = 'QRCode.png';
     document.body.appendChild(link);
     link.click();
@@ -25,7 +39,7 @@ const GetQRCode = () => {
           <div className="flex flex-col gap-5 py-5 p-5">
             <div className="flex justify-center mb-4">
               <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/220px-QR_code_for_mobile_English_Wikipedia.svg.png"
+                src={qrCode}
                 alt="QR Code"
                 className="w-48 h-48"
               />

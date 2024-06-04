@@ -1,5 +1,4 @@
 // frontend/src/App.jsx
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import SignupForm from './components/SignupForm';
@@ -25,7 +24,7 @@ import ItemAdded from './components/ItemAdded';
 import CustomerView from './components/CustomerView';
 import DiscountForm from './components/DiscountForm';
 import MenuPreview from './components/MenuPreview'
-import ViewItemDetails from './components/ViewItemDetails';
+import FeedbackForm from './components/FeedbackForm';
 
 const App = () => {
   return (
@@ -35,7 +34,7 @@ const App = () => {
         <Route path='/login' element={<LoginForm />} />
         <Route path='/' element={<LoginForm />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/add-update-category' element={<AddUpdateCategory userId="YOUR_USER_ID" />} />
+        <Route path='/add-update-category' element={<AddUpdateCategory />} />
         <Route path='/add-update-item' element={<AddUpdateItem />} />
         <Route path="/item-images" element={<ItemImages />} />
         <Route path="/item-added" element={<ItemAdded />} />
@@ -54,7 +53,8 @@ const App = () => {
         <Route path="/item-pricing" element={<ItemPricing />} />
         <Route path="/customer-view" element={<CustomerView />} />
         <Route path="/discount-form/:itemId" element={<DiscountForm />} />
-        <Route path="/view-item-details" element={<ViewItemDetails />} />
+        <Route path='/:email' element={<MenuPreview />} />
+        <Route path="/feedback-form/:email" element={<FeedbackForm />} />
       </Routes>
     </BrowserRouter>
   );

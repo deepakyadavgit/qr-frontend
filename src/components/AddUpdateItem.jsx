@@ -1,22 +1,19 @@
 // frontend/src/components/AddUpdateItem.jsx
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AddUpdateItem = () => {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
 
   // Simulate fetching items from an API
   useEffect(() => {
     const fetchItems = async () => {
       // Replace with actual API call
-      const itemData = [
-        { id: 1, name: 'Cafe Mocha' },
-        { id: 2, name: 'Latte' },
-        { id: 3, name: 'Espresso' },
-        // Add more items as needed
-      ];
-      setItems(itemData);
+      const res = await axios.get(`http://localhost:5000/api/items/all/${userId}`);
+      setItems(res.data.data);
     };
 
     fetchItems();
@@ -55,10 +52,10 @@ const AddUpdateItem = () => {
               {items.length > 0 ? (
                 <ul>
                   {items.map(item => (
-                    <li key={item.id} className="mb-4 flex justify-between items-center border p-4 rounded-lg bg-white shadow-md">
+                    <li key={item._id} className="mb-4 flex justify-between items-center border p-4 rounded-lg bg-white shadow-md">
                       <span>{item.name}</span>
                       <button
-                        onClick={() => handleEditItem(item.id)}
+                        onClick={() => handleEditItem(item._id)}
                         className="text-blue-500 hover:text-blue-700"
                       >
                         ✏️ Edit

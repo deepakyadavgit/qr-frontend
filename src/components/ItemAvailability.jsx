@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ItemAvailability = () => {
   const [items, setItems] = useState([]);
-
+  const [prevItems, setPrevItems] = useState([]);
   // Simulate fetching items from an API
   useEffect(() => {
+    const userId = localStorage.getItem("userId");
     const fetchItems = async () => {
       // Replace with actual API call
-      const itemData = [
-        { id: 1, name: 'Cafe Mocha', available: true },
-        { id: 2, name: 'Latte', available: true },
-        { id: 3, name: 'Espresso', available: true },
-        { id: 4, name: 'Americano', available: true },
-        { id: 5, name: 'Cold Coffee', available: true },
-        { id: 6, name: 'Ice Tea', available: true },
-        { id: 7, name: 'Cappuchino', available: true },
-        // Add more items as needed
-      ];
-      setItems(itemData);
+      const res = await axios.get(`http://localhost:5000/api/items/all/${userId}`);
+      console.log(res);
+      if (res.data.success) {
+        setItems(res.data.data);
+        setPrevItems(res.data.data);
+      }
     };
 
     fetchItems();
@@ -26,18 +24,38 @@ const ItemAvailability = () => {
   const handleAvailabilityToggle = (id) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, available: !item.available } : item
+        item._id === id ? { ...item, enabled: !item.enabled } : item
       )
     );
   };
 
-  const handleUpdate = () => {
-    // Replace with actual API call to update items
-    console.log('Updated items:', items);
-    // Simulate an API call
-    setTimeout(() => {
-      alert('Items updated successfully!');
-    }, 500);
+  const navigate = useNavigate();
+
+  const handleUpdate = async () => {
+    // find all the items where the enabled field is changed, if the enable filed is changed, then make an array with the _id and the enabled status of the item
+    console.log("Items before update:", items);
+    const userId = localStorage.getItem("userId");
+    const updatedItems = items.filter((item) => {
+      return {
+        _id: item._id,
+        status:
+          item.enabled !==
+          prevItems.find((prevItem) => prevItem._id === item._id).enabled
+            ? item.enabled
+            : prevItems.find((prevItem) => prevItem._id === item._id).enabled,
+      };
+    });
+    console.log("Updated items:", updatedItems);
+    const res = await axios.put(`http://localhost:5000/api/items/${userId}`, {
+      updatedItems,
+    });
+
+    if (res.data.success) {
+      alert("Items updated successfully!");
+      navigate("/dashboard");
+    } else {
+      alert("Items not updated successfully!");
+    }
   };
 
   return (
@@ -45,23 +63,28 @@ const ItemAvailability = () => {
       <div className="container w-full sm:w-96 bg-[#D9D9D9] relative">
         {/* component heading */}
         <div className="bg-black text-white py-6 sticky top-0 z-10">
-          <h1 className="text-2xl px-6">Item's Availability</h1>
+          <h1 className="text-2xl px-6">{"Item's Availability"}</h1>
         </div>
 
         {/* component middle section */}
         <div className="flex flex-col gap-5 py-5 p-5">
           <div>
-            <h3 className="text-lg font-semibold mb-2">Item's list:</h3>
-            <p className="text-gray-700 mb-4">Turn off the checkbox to make an item unavailable to the customers</p>
+            <h3 className="text-lg font-semibold mb-2">{"Item's list:"}</h3>
+            <p className="text-gray-700 mb-4">
+              Turn off the checkbox to make an item unavailable to the customers
+            </p>
             {items.length > 0 ? (
               <ul>
-                {items.map(item => (
-                  <li key={item.id} className="mb-4 flex justify-between items-center border p-4 rounded-lg bg-white shadow-md">
+                {items.map((item) => (
+                  <li
+                    key={item._id}
+                    className="mb-4 flex justify-between items-center border p-4 rounded-lg bg-white shadow-md"
+                  >
                     <span>{item.name}</span>
                     <input
                       type="checkbox"
-                      checked={item.available}
-                      onChange={() => handleAvailabilityToggle(item.id)}
+                      checked={item.enabled}
+                      onChange={() => handleAvailabilityToggle(item._id)}
                       className="form-checkbox h-5 w-5 text-green-500"
                     />
                   </li>

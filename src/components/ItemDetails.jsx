@@ -86,15 +86,35 @@ const ItemDetails = () => {
     setMultiplePricing(updatedPricing);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log();
-  };
+    
+    const itemData = {
+      name: itemName,
+      description: itemDescription,
+      category: itemCategory,
+      keyIngredients: keyIngredients,
+      pricingType: pricingType,
+      price: singlePrice,
+      quantity: servingQuantity,
+      pricing: multiplePricing,
+      images: images,
+      type: itemType
+    }
 
-  const handleProceed = () => {
-    // Save item details to state or context (not implemented here)
-    // Navigate to the next step (Pricing)
-    navigate("/item-pricing"); // You should replace '/item-pricing' with the actual route for the pricing step
+    const res = await axios.post("http://localhost:5000/api/items", {
+      ...itemData,
+      userId: localStorage.getItem("userId")
+    },{
+      headers:{
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    if(res.data.success){
+      navigate('/item-added');
+    }else{
+      alert('Item not added successfully!');
+    }
   };
 
   return (
