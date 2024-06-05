@@ -12,7 +12,11 @@ const AddUpdateItem = () => {
   useEffect(() => {
     const fetchItems = async () => {
       // Replace with actual API call
-      const res = await axios.get(`http://localhost:5000/api/items/all/${userId}`);
+      const res = await axios.get(`https://digimenu.onrender.com/api/items/all/${userId}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       setItems(res.data.data);
     };
 

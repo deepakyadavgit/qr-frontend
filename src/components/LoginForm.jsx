@@ -9,7 +9,11 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users/login', { email, password })
+    axios.post('https://digimenu.onrender.com/api/users/login', { email, password },{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then(result => {
         console.log('Login response:', result);
         if (result) {

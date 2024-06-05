@@ -22,7 +22,7 @@ const ItemDetails = () => {
   const userId = localStorage.getItem("userId");
   const getCategories = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/categories`, {
+      const res = await axios.get(`https://digimenu.onrender.com/api/categories`, {
         params: {
           userId,
         },
@@ -102,7 +102,7 @@ const ItemDetails = () => {
       type: itemType
     }
 
-    const res = await axios.post("http://localhost:5000/api/items", {
+    const res = await axios.post("https://digimenu.onrender.com/api/items", {
       ...itemData,
       userId: localStorage.getItem("userId")
     },{

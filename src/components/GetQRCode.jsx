@@ -7,7 +7,11 @@ const GetQRCode = () => {
   React.useEffect(() => {
     const fetchUser = async () => {
       // Replace with actual API call
-      const res = await axios.get(`http://localhost:5000/api/users/${userId}`);
+      const res = await axios.get(`https://digimenu.onrender.com/api/users/${userId}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res);
       if (res.data.success) {
         setQrCode(res.data.data.qrCode);

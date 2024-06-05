@@ -10,7 +10,11 @@ const TodaysSpecial = () => {
   useEffect(() => {
     const fetchItems = async () => {
       // Replace with actual API call
-      const res = await axios.get(`http://localhost:5000/api/items/all/${userId}`);
+      const res = await axios.get(`https://digimenu.onrender.com/api/items/all/${userId}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res);
       if (res.data.success) {
         setItems(res.data.data);
@@ -49,9 +53,13 @@ const TodaysSpecial = () => {
     });
     console.log("Updated items:", updatedItems);
     const res = await axios.put(
-      `http://localhost:5000/api/items/todaysSpecial/${userId}`,
+      `https://digimenu.onrender.com/api/items/todaysSpecial/${userId}`,
       {
         updatedItems,
+      },{
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
 

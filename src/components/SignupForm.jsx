@@ -13,7 +13,11 @@ function SignupForm() {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevents default submission of the form
     // Using axios to post the data to the backend
-    axios.post('http://localhost:5000/api/users/register', { email, businessName, password })
+    axios.post('https://digimenu.onrender.com/api/users/register', { email, businessName, password },{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then(result => {
         console.log(result);
         // When signup is successful, navigate to the login page

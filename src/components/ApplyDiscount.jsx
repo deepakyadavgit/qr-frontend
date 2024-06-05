@@ -14,9 +14,13 @@ const ApplyDiscount = () => {
     // Replace with actual API call to apply the discount
     // Simulate an API call
     console.log(selectedItem);
-    const res = await axios.put(`http://localhost:5000/api/items/applyDiscount/${userId}`, {
+    const res = await axios.put(`https://digimenu.onrender.com/api/items/applyDiscount/${userId}`, {
       itemId: selectedItem,
       discount: discount
+    },{
+      headers: {
+        "Content-Type": "application/json",
+      },
     }); 
     if (res.data.success) {
       alert("Discount applied successfully!");
@@ -32,7 +36,11 @@ const ApplyDiscount = () => {
   useEffect(() => {
     const fetchItems = async () => {
       // Replace with actual API call
-      const res = await axios.get(`http://localhost:5000/api/items/all/${userId}`);
+      const res = await axios.get(`https://digimenu.onrender.com/api/items/all/${userId}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res);
       if (res.data.success) {
         setItems(res.data.data);

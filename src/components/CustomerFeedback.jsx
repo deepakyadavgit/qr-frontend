@@ -9,7 +9,11 @@ const CustomerFeedback = () => {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       // Replace with actual API call
-      const res = await axios.get(`http://localhost:5000/api/feedbacks/${userId}`);
+      const res = await axios.get(`https://digimenu.onrender.com/api/feedbacks/${userId}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       setFeedbacks(res.data.data);
     };
 
@@ -19,7 +23,11 @@ const CustomerFeedback = () => {
   const handleDeleteFeedback = async (id) => {
     // Simulate deleting feedback (replace with actual API call)
     setFeedbacks(feedbacks.filter(feedback => feedback._id !== id));
-    const res = await axios.delete(`http://localhost:5000/api/feedbacks/${id}`);
+    const res = await axios.delete(`https://digimenu.onrender.com/api/feedbacks/${id}`,{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (res.data.success) {
       alert("Feedback deleted successfully!");
     } else {

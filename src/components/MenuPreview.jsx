@@ -16,9 +16,13 @@ const CustomerView = () => {
       try {
         const res = await axios.get(
           userId
-            ? `http://localhost:5000/api/items/menuPreview/${userId}`
-            : `http://localhost:5000/api/menu/${email}`
-        );
+            ? `https://digimenu.onrender.com/api/items/menuPreview/${userId}`
+            : `https://digimenu.onrender.com/api/menu/${email}`
+        ,{
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         console.log(res);
         if (res.data.success) {
           setItems(res.data.data.items);

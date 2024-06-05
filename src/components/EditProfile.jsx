@@ -14,7 +14,11 @@ const EditProfile = () => {
   React.useEffect(() => {
     const fetchUser = async () => {
       // Replace with actual API call
-      const res = await axios.get(`http://localhost:5000/api/users/${userId}`);
+      const res = await axios.get(`https://digimenu.onrender.com/api/users/${userId}`,{
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res);
       if (res.data.success) {
         setEmail(res.data.data.email);
@@ -31,9 +35,13 @@ const EditProfile = () => {
   const handleBusinessNameChange = async (e) => {
     e.preventDefault();
     const response = await axios.put(
-      `http://localhost:5000/api/users/${userId}`,
+      `https://digimenu.onrender.com/api/users/${userId}`,
       {
         businessName: businessName,
+      },{
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     if (response.data.success) {
@@ -48,10 +56,14 @@ const EditProfile = () => {
     setIsEditingOwnerDetails(false);
     // Handle save logic for owner details
     const response = await axios.put(
-      `http://localhost:5000/api/users/${userId}`,
+      `https://digimenu.onrender.com/api/users/${userId}`,
       {
         ownerFirstName: firstName,
         ownerLastName: lastName,
+      },{
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     if (response.data.success) {
@@ -66,9 +78,13 @@ const EditProfile = () => {
     setIsEditingGoogleLink(false);
     // Handle save logic for Google link
     const response = await axios.put(
-      `http://localhost:5000/api/users/${userId}`,
+      `https://digimenu.onrender.com/api/users/${userId}`,
       {
         googleLink: googleLink,
+      },{
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
     if (response.data.success) {

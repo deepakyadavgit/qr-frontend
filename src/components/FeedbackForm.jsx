@@ -11,9 +11,13 @@ const FeedbackForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/feedbacks", {
+      await axios.post("https://digimenu.onrender.com/api/feedbacks", {
         email,
         feedback,
+      },{
+        headers: {
+            "Content-Type": "application/json",
+          },
       });
       alert("Feedback submitted successfully!");
     } catch (error) {

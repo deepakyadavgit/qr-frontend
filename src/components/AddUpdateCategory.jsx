@@ -16,11 +16,17 @@ const AddUpdateCategory = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/categories`, {
-        params: {
-          userId,
-        },
-      });
+      const response = await axios.get(
+        `https://digimenu.onrender.com/api/categories`,
+        {
+          params: {
+            userId,
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setCategories(response.data.data);
     } catch (err) {
       console.error(
@@ -33,8 +39,13 @@ const AddUpdateCategory = () => {
   const handleAddCategory = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/categories",
-        { name: newCategoryName, userId }
+        "https://digimenu.onrender.com/api/categories",
+        { name: newCategoryName, userId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       setCategories([...categories, response.data.data]);
       setNewCategoryName("");
@@ -54,8 +65,13 @@ const AddUpdateCategory = () => {
   const handleUpdateCategory = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/categories/${editCategoryId}`,
-        { name: editCategoryName, userId }
+        `https://digimenu.onrender.com/api/categories/${editCategoryId}`,
+        { name: editCategoryName, userId },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       setCategories(
         categories.map((category) =>
@@ -75,7 +91,11 @@ const AddUpdateCategory = () => {
   const handleDeleteCategory = async (categoryId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/categories/${categoryId}?userId=${userId}`
+        `https://digimenu.onrender.com/api/categories/${categoryId}?userId=${userId}`,{
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       setCategories(
         categories.filter((category) => category._id !== categoryId)
@@ -132,12 +152,10 @@ const AddUpdateCategory = () => {
                         onChange={(e) => setEditCategoryName(e.target.value)}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                       />
-                      <button
-                        onClick={handleUpdateCategory}
-                      >
-                        ✅
+                      <button onClick={handleUpdateCategory}>✅</button>
+                      <button onClick={() => setEditCategoryId(null)}>
+                        ❌
                       </button>
-                      <button onClick={()=>setEditCategoryId(null)} >❌</button> 
                     </>
                   ) : (
                     <>
